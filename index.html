@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue's Core Functionality</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <h1>Monster Slayer Game</h1>
+
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Monster's Life</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="monsterLife"></div>
+        </div>
+      </section>
+
+      <section id="player" class="container">
+        <h2>Player's Life</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="myLife"></div>
+        </div>
+      </section>
+      <section class="container" v-if="winner">
+        <h2>GAME OVER!</h2>
+        <h3 v-if="winner === 'wasey'">You won!</h3>
+        <h3 v-else-if="winner  === 'monster'">You lost!</h3>
+        <h3 v-else>It's a draw</h3>
+        <button @click="startNewGame">Start New Game</button>
+      </section>
+
+      <section id="controls" v-else="!winner">
+        <button @click="attackMonster">ATTACK</button>
+        <br />
+        <button
+          :disabled="specialAttackFunctionality"
+          @click="specialAttackMonster"
+        >
+          SPECIAL ATTACK
+        </button>
+        <br />
+        <button @click="healMe">HEAL</button>
+        <br />
+        <button @click="surrender">SURRENDER</button>
+      </section>
+
+      <section id="log" class="container">
+        <h2>Battle log</h2>
+        <ul></ul>
+      </section>
+    </div>
+  </body>
+</html>
